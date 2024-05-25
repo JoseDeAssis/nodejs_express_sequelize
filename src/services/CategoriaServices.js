@@ -1,10 +1,10 @@
 /* eslint-disable linebreak-style */
 const Services = require('./Services.js');
 
-class PessoasServices extends Services { 
+class CategoriaServices extends Services {
   constructor() {
-    super('Pessoa');
+    super('Categoria');
   }
 }
 
-module.exports = PessoasServices;
+module.exports = CategoriaServices;

@@ -56,6 +56,7 @@ class Controller {
 
   async delete(req, res) {
     const { id } = req.params;
+    console.log(id);
     
     try {
       await this.serviceEntity.deleteRegister(Number(id));
