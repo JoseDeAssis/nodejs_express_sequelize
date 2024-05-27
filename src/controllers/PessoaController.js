@@ -21,6 +21,16 @@ class PessoaController extends Controller {
       return res.status(500).json({ message: 'erro no servidor' });
     }
   }
+
+  async getTodasAsPessoas(req, res) {
+    try {
+      const pessoas = await pessoasServices.getPessoasEscopoTodas();
+
+      return res.status(200).json(pessoas);
+    } catch(error) {
+      return res.status(500).json({ message: 'erro no servidor' });
+    }
+  }
 }
 
 module.exports = PessoaController;

@@ -12,6 +12,12 @@ class PessoasServices extends Services {
 
     return matriculas;
   }
+
+  async getPessoasEscopoTodas() {
+    const pessoas = await super.getRegistersByScope('todosOsRegistros');
+    
+    return pessoas;
+  }
 }
 
 module.exports = PessoasServices;
