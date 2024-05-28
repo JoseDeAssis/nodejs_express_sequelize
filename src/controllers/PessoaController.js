@@ -10,15 +10,27 @@ class PessoaController extends Controller {
     super(pessoasServices);
   }
 
-  async getMatriculas(req, res) {
-    const { estudanteId } = req.params;
+  async getMatriculasAtivas(req, res) {
+    const { estudante_id } = req.params;
 
     try {
-      const matriculas = await pessoasServices.getMatriculasByEstudante(Number(estudanteId));
+      const matriculas = await pessoasServices.getMatriculasAtivasByEstudante(Number(estudante_id));
 
       return res.status(200).json(matriculas);
     } catch(error) {
-      return res.status(500).json({ message: 'erro no servidor' });
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  async getAllMatriculas(req, res) {
+    const { estudante_id } = req.params;
+
+    try {
+      const matriculas = await pessoasServices.getAllMatriculas(Number(estudante_id));
+
+      return res.status(200).json(matriculas);
+    } catch(error) {
+      return res.status(500).json({ error: error.message} );
     }
   }
 

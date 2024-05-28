@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+const converteIds = require('../utils/conversorStringHelper.js');
+
 class Controller {
   constructor(serviceEntity) {
     this.serviceEntity = serviceEntity;
@@ -26,6 +28,19 @@ class Controller {
     }
   }
 
+  async getRegister(req, res) {
+    const { ...params } = req.params;
+    const where = converteIds(params);
+
+    try{ 
+      const register = await this.serviceEntity.getRegister(where);
+
+      return res.status(200).json(register);
+    } catch(error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
   async create(req, res) {
     const newRegister = req.body;
 
@@ -39,11 +54,12 @@ class Controller {
   }
 
   async update(req, res) {
-    const { id } = req.params;
+    const { ...params } = req.params;
     const updatedData = req.body;
+    const where = converteIds(params);
     
     try {
-      const isUpdated = await this.serviceEntity.updateRegister(updatedData, Number(id));
+      const isUpdated = await this.serviceEntity.updateRegister(updatedData, where);
       
       if(!isUpdated) {
         return res.status(400).json({ message: 'Registro não foi atualizado' }); 
