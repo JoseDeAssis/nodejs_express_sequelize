@@ -30,9 +30,10 @@ class Services {
     return dataSource[this.model].create(register);
   }
 
-  async updateRegister(dataToUpdate, where) {
+  async updateRegister(dataToUpdate, where, transacao = {}) {
     const updatedRegisters = await dataSource[this.model].update(dataToUpdate, {
-      where: { ...where } // poderia ser where: { id } porque o campo a ser atualizado e o valor passado tem o mesmo nome
+      where: { ...where }, // poderia ser where: { id } porque o campo a ser atualizado e o valor passado tem o mesmo nome
+      transaction: transacao
     });
 
     if(updatedRegisters[0] === 0) return false;
