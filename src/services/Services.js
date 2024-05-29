@@ -6,8 +6,8 @@ class Services {
     this.model = modelName;
   }
 
-  async getAllRegisters() {
-    return dataSource[this.model].findAll();
+  async getAllRegisters(where = {}) {
+    return dataSource[this.model].findAll({ where: { ...where } });
   }
 
   async getRegistersByScope(scope) {
@@ -20,6 +20,10 @@ class Services {
 
   async getRegister(where) {
     return dataSource[this.model].findOne({ where: { ...where } });
+  }
+
+  async getNumberOfRegisters(options) {
+    return dataSource[this.model].findAndCountAll({ ...options });
   }
 
   async createRegister(register) {
